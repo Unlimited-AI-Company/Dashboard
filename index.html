@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Unlimited AI Company Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body class="bg-gray-900 text-gray-100">
+  <div id="root"></div>
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    // Sample tool data (replace with API call to backend)
+    const initialTools = [
+      { id: 1, name: 'Grok', category: 'Customer Support', widget: 'https://grok.com', description: 'AI chatbot with real-time X data' },
+      { id: 2, name: 'ChatGPT', category: 'Content Creation', widget: 'https://chat.openai.com', description: 'Generate text, images, and FAQs' },
+      { id: 3, name: 'Tidio', category: 'Customer Support', widget: 'https://www.tidio.com/panel', description: 'Free chatbot for 50 chats/month' },
+      { id: 4, name: 'Mailchimp', category: 'Marketing', widget: 'https://mailchimp.com', description: 'Free email campaigns for 1,000 emails/month' },
+      { id: 5, name: 'Canva', category: 'Marketing', widget: 'https://www.canva.com', description: 'Free AI-powered ad creation' },
+      { id: 6, name: 'Google Analytics', category: 'Analytics', widget: 'https://analytics.google.com', description: 'Free website traffic insights' },
+      { id: 7, name: 'Zapier', category: 'Automation', widget: 'https://zapier.com', description: 'Free automation for 100 tasks/month' },
+      { id: 8, name: 'Accio', category: 'Analytics', widget: 'https://accio.ai', description: 'Instant data queries or content' },
+      { id: 9, name: 'CopyOwl.ai', category: 'Marketing', widget: 'https://copyowl.ai', description: 'Free ad copy generation' },
+      { id: 10, name: 'LumaLabsAI', category: 'Content Creation', widget: 'https://lumalabs.ai', description: 'Free video and 3D model creation' },
+      { id: 11, name: 'Gamma AI', category: 'Content Creation', widget: 'https://gamma.app', description: 'Free presentation creation' },
+      { id: 12, name: 'me.bot', category: 'Automation', widget: 'https://me.bot', description: 'Free task management' },
+      { id: 13, name: 'Photopea', category: 'Marketing', widget: 'https://www.photopea.com', description: 'Free Photoshop-like editing' },
+      { id: 14, name: 'RendoraAI', category: 'Content Creation', widget: 'https://rendora.ai', description: 'Free video rendering' },
+    ];
+
+    // Tool Card Component
+    const ToolCard = ({ tool }) => (
+      <div className="bg-gray-800 p-4 rounded-lg shadow-lg">
+        <h3 className="text-lg font-bold text-gray-100">{tool.name}</h3>
+        <p className="text-gray-400">{tool.description}</p>
+        <a href={tool.widget} target="_blank" className="mt-2 inline-block text-blue-400 hover:text-blue-300">
+          Launch Tool
+        </a>
+      </div>
+    );
+
+    // Main Dashboard Component
+    const Dashboard = () => {
+      const [tools, setTools] = useState(initialTools);
+      const [category, setCategory] = useState('All');
+
+      // Filter tools by category
+      const filteredTools = category === 'All' 
+        ? tools 
+        : tools.filter(tool => tool.category === category);
+
+      // Fetch tools from backend (placeholder)
+      // useEffect(() => {
+      //           fetch('http://localhost:3000/api/tools')
+      //   .then(res => res.json())
+      //   .then(data => setTools(data));
+      // }, []);
+
+      return (
+        <div className="container mx-auto p-6">
+          <header className="flex justify-between items-center mb-8">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-100">The Unlimited AI Company Dashboard</h1>
+              <p className="text-gray-400">Unleash Your Business with AI</p>
+            </div>
+            <img src="/logo.png" alt="Logo" className="h-12" /> {/* Replace with Fibonacci logo */}
+          </header>
+
+          {/* Category Filter */}
+          <div className="mb-6">
+            <label className="mr-4 text-gray-300">Filter by Category:</label>
+            <select 
+              className="bg-gray-800 text-gray-100 p-2 rounded"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              <option>All</option>
+              <option>Customer Support</option>
+              <option>Marketing</option>
+              <option>Content Creation</option>
+              <option>Analytics</option>
+              <option>Automation</option>
+            </select>
+          </div>
+
+          {/* Tool Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredTools.map(tool => (
+              <ToolCard key={tool.id} tool={tool} />
+            ))}
+          </div>
+
+          {/* Analytics Section */}
+          <div className="mt-12">
+            <h2 className="text-2xl font-bold text-gray-100 mb-4">Your AI Impact</h2>
+            <div className="bg-gray-800 p-6 rounded-lg">
+              <p className="text-gray-400">Track KPIs like chatbot conversations, email opens, and more. Coming soon!</p>
+            </div>
+          </div>
+
+          {/* Footer */}
+          <footer className="mt-12 text-center text-gray-400">
+            <p>"In Demos We Trust"</p>
+            <p>© 2025 The Unlmited AI Company. Contact: contact@unlimitedai.com.au</p>
+            <p>Follow us on X | LinkedIn</p>
+          </footer>
+        </div>
+      );
+    };
+
+    // Render the app
+    ReactDOM.render(<Dashboard />, document.getElementById('root'));
+  </script>
+</body>
+</html>
